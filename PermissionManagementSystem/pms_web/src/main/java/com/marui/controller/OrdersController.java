@@ -4,50 +4,49 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.marui.domain.Orders;
-import com.marui.domain.Product;
-import com.marui.service.IProductService;
+import com.marui.service.IOrdersService;
 
 /**
- * 产品控制器类
+ * 订单控制器类
  * @author MaRui
  *
  */
 @Controller
-@RequestMapping("/product")
-public class ProductController {
+@RequestMapping("/orders")
+public class OrdersController {
 	@Autowired
-	private IProductService productService;
-	
+	private IOrdersService ordersService;
+
 	@RequestMapping("/findAll.do")
 	public ModelAndView findAll() throws Exception {
-		List<Product> products = productService.findAll();
+		List<Orders> list = ordersService.findAll();
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("productList",products);
-		mav.setViewName("product-page-list");
+		mav.addObject("ordersList",list);
+		mav.setViewName("orders-list");
 		return mav;
 	}
 
 	@RequestMapping("/findAllByPage.do")
 	public ModelAndView findAllByPage(@RequestParam(name="pageNum",required=true,defaultValue="1")int pageNum,@RequestParam(name="pageSize",required=true,defaultValue="4")int pageSize ) throws Exception {
-		List<Product> list = productService.findAllByPage(pageNum,pageSize);
+		List<Orders> list = ordersService.findAllByPage(pageNum,pageSize);
 		PageInfo pageInfo = new PageInfo(list);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pageInfo",pageInfo);
-		mav.setViewName("product-page-list");
+		mav.setViewName("orders-page-list");
 		return mav;
 	}
 
 	@RequestMapping("/save.do")
-	public String saveProduct(Product product) {
-		productService.saveProduct(product);
-		System.out.println(product);
-		return "redirect:/product/findAllByPage.do";
+	public String saveOrders(Orders oders) {
+		ordersService.saveOrders(oders);
+		System.out.println(oders);
+		return "redirect:/orders/findAll.do";
 	}
+
 }

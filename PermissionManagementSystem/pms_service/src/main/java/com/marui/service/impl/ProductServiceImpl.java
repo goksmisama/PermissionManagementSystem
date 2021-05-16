@@ -1,5 +1,6 @@
 package com.marui.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.marui.dao.IProductDao;
 import com.marui.domain.Product;
 import com.marui.service.IProductService;
@@ -33,7 +34,14 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public void save(Product product) {
-        productDao.save(product);
+    @Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+    public List<Product> findAllByPage(int pageNum, int pageSize) throws Exception {
+        PageHelper.startPage(pageNum,pageSize);
+        return productDao.findAll();
+    }
+
+    @Override
+    public void saveProduct(Product product) {
+        productDao.saveProduct(product);
     }
 }

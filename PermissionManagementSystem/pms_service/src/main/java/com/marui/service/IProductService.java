@@ -1,6 +1,8 @@
 package com.marui.service;
 
 import com.marui.domain.Product;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -10,10 +12,10 @@ import java.util.List;
  * @date 2021-05-14 17:26
  */
 public interface IProductService {
-    /**
-     * 查询所有产品信息
-     */
+
     List<Product> findAll() throws Exception;
 
-    void save(Product product);
+    List<Product> findAllByPage(int pageNum, int pageSize) throws Exception;
+
+    void saveProduct(Product product);
 }

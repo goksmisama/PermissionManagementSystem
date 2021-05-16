@@ -178,7 +178,6 @@
         </dependency>
     </dependencies>
     <build>
-        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>org.apache.tomcat.maven</groupId>
@@ -186,7 +185,7 @@
                     <version>2.2</version>
                     <configuration>
                         <port>8080</port>
-                        <path>/ssm</path>
+                        <path>/pms</path>
                         <uriEncoding>UTF-8</uriEncoding>
                     </configuration>
                 </plugin>
@@ -202,7 +201,6 @@
                     </configuration>
                 </plugin>
             </plugins>
-        </pluginManagement>
     </build>
 
 

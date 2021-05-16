@@ -33,7 +33,7 @@ public class OrdersController {
 	}
 
 	@RequestMapping("/findAllByPage.do")
-	public ModelAndView findAllByPage(@RequestParam(name="pageNum",required=true,defaultValue="1")int pageNum,@RequestParam(name="pageSize",required=true,defaultValue="4")int pageSize ) throws Exception {
+	public ModelAndView findAllByPage(@RequestParam(name="pageNum",defaultValue="1")int pageNum,@RequestParam(name="pageSize",required=true,defaultValue="4")int pageSize ) throws Exception {
 		List<Orders> list = ordersService.findAllByPage(pageNum,pageSize);
 		PageInfo pageInfo = new PageInfo(list);
 		ModelAndView mav = new ModelAndView();
@@ -47,6 +47,15 @@ public class OrdersController {
 		ordersService.saveOrders(oders);
 		System.out.println(oders);
 		return "redirect:/orders/findAll.do";
+	}
+
+	@RequestMapping("/findById.do")
+	public ModelAndView findById(@RequestParam(name="id",required=true)String id) throws Exception {
+		Orders orders =ordersService.findById(id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("orders",orders);
+		mav.setViewName("orders-show");
+		return mav;
 	}
 
 }

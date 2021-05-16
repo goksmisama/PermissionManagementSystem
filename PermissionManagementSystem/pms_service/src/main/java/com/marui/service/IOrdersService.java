@@ -15,4 +15,6 @@ public interface IOrdersService {
     List<Orders> findAllByPage(int pageNum,int pageSize) throws Exception;
 
     void saveOrders(Orders orders);
+
+    Orders findById(String id) throws Exception;
 }

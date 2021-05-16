@@ -39,4 +39,9 @@ public class OrdersServiceImpl implements IOrdersService {
     public void saveOrders(Orders orders) {
         ordersDao.saveOrders(orders);
     }
+
+    @Override
+    public Orders findById(String id) throws Exception{
+        return ordersDao.findById(id);
+    }
 }

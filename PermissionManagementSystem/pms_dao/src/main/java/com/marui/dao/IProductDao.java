@@ -22,4 +22,7 @@ public interface IProductDao {
     @Insert("insert into product(productNum,productName,cityName,departureTime,productPrice,productDesc,productStatus) "
             + "values(#{productNum},#{productName},#{productName},#{departureTime},#{productPrice},#{productDesc},#{productStatus}) ")
     void saveProduct(Product product);
+
+    @Select("select * from product where id=#{productId}")
+    Product findById(String productId) throws Exception;
 }

@@ -33,4 +33,9 @@ public class ProductController {
 		mav.setViewName("product-page-list");
 		return mav;
 	}
+
+	@RequestMapping("/save.do")
+	public void save(Product product) {
+		productService.save(product);
+	}
 }
